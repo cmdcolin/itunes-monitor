@@ -10,9 +10,10 @@ class CMainFrame : public CFrameWindowImpl<CMainFrame>, public CUpdateUI<CMainFr
 		public CMessageFilter, public CIdleHandler
 {
 public:
+
 	DECLARE_FRAME_WND_CLASS(NULL, IDR_MAINFRAME)
 
-	CChamView m_view;
+	iTunesView m_view;
 	CCommandBarCtrl m_CmdBar;
 
 	CMainFrame() : m_view(this) { }

@@ -93,14 +93,6 @@ BEGIN
         MENUITEM SEPARATOR
         MENUITEM "E&xit",                       ID_APP_EXIT
     END
-    POPUP "&Edit"
-    BEGIN
-        MENUITEM "&Undo\tCtrl+Z",               ID_EDIT_UNDO
-        MENUITEM SEPARATOR
-        MENUITEM "Cu&t\tCtrl+X",                ID_EDIT_CUT
-        MENUITEM "&Copy\tCtrl+C",               ID_EDIT_COPY
-        MENUITEM "&Paste\tCtrl+V",              ID_EDIT_PASTE
-    END
     POPUP "&View"
     BEGIN
         MENUITEM "&Toolbar",                    ID_VIEW_TOOLBAR
@@ -108,7 +100,7 @@ BEGIN
     END
     POPUP "&Help"
     BEGIN
-        MENUITEM "&About cham...",              ID_APP_ABOUT
+        MENUITEM "&About this...",              ID_APP_ABOUT
     END
 END
 
@@ -119,7 +111,7 @@ END
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-IDR_MAINFRAME           ICON                    "res\\cham.ico"
+IDR_MAINFRAME           ICON                    "res\\iTunes.ico"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -132,7 +124,7 @@ CAPTION "About"
 FONT 8, "MS Sans Serif"
 BEGIN
     DEFPUSHBUTTON   "OK",IDOK,130,81,50,14
-    CTEXT           "cham Application v1.0\n\n(c) Copyright 2008",IDC_STATIC,25,57,78,
+    CTEXT           "iTunes Application v1.0\n\n(c) Copyright 2008",IDC_STATIC,25,57,78,
                     32
     ICON            IDR_MAINFRAME,IDC_STATIC,55,26,18,20
     GROUPBOX        "",IDC_STATIC,7,7,115,88
@@ -207,12 +199,12 @@ BEGIN
         BLOCK "040904B0"
         BEGIN
             VALUE "CompanyName", "\0"
-            VALUE "FileDescription", "cham Module\0"
+            VALUE "FileDescription", "iTunes Module\0"
             VALUE "FileVersion", "1, 0, 0, 1\0"
-            VALUE "InternalName", "cham\0"
+            VALUE "InternalName", "iTunes\0"
             VALUE "LegalCopyright", "Copyright 2008\0"
-            VALUE "OriginalFilename", "cham.exe\0"
-            VALUE "ProductName", "cham Module\0"
+            VALUE "OriginalFilename", "iTunes.exe\0"
+            VALUE "ProductName", "iTunes Module\0"
             VALUE "ProductVersion", "1, 0, 0, 1\0"
         END
     END
@@ -229,7 +221,7 @@ END
 
 STRINGTABLE 
 BEGIN
-    IDR_MAINFRAME	"Cham"
+    IDR_MAINFRAME	"iTunes Now Playing"
 END
 
 STRINGTABLE 

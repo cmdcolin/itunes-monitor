@@ -1,4 +1,8 @@
-// cham.cpp : main source file for cham.exe
+// 
+// Author : Colin Diesh
+// 2008 - 2009
+// 
+// iTunes COM interface utilities
 //
 
 #include "stdafx.h"

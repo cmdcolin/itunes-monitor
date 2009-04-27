@@ -1,7 +1,7 @@
 #pragma once
 
 #include "stdafx.h"
-class CChamView;
+class iTunesView;
 
 class CITunesEventHandler : public _IiTunesEvents /* public IUnknown, public IDispatch */
 {
@@ -13,11 +13,11 @@ private:
 
 
 
-	 CChamView * main;
+	 iTunesView * main;
 
 public:
 
-	CITunesEventHandler(CChamView * m) : main(m), m_dwRefCount(1)
+	CITunesEventHandler(iTunesView * m) : main(m), m_dwRefCount(1)
 	{
 		ITypeLib* pITypeLib = NULL;
 

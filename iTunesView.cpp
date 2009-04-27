@@ -1,4 +1,4 @@
-// chamView.cpp : implementation of the CChamView class
+// chamView.cpp : implementation of the iTunesView class
 //
 /////////////////////////////////////////////////////////////////////////////
 
@@ -10,25 +10,17 @@
 
 
 
-BOOL CChamView::PreTranslateMessage(MSG* pMsg)
+BOOL iTunesView::PreTranslateMessage(MSG* pMsg)
 {
 	pMsg;
 	return FALSE;
 }
 
 
-LRESULT CChamView::OnCreate(LPCREATESTRUCT lpcs)
-{
-	RECT r = { 0, 0, lpcs->cx, lpcs->cy };
-	
-	this->m_scrollBar.Create
-		( 
-			m_hWnd, 
-			&r, 
-			NULL, 
-			WS_VISIBLE | WS_CHILD | SBS_VERT | WS_GROUP
-		);
-	m_scrollBar.ShowWindow(true);
+LRESULT iTunesView::OnCreate(LPCREATESTRUCT lpcs)
+{    
+	SetScrollOffset(lpcs->cx, lpcs->cy, FALSE);
+	SetScrollSize(lpcs->cx, lpcs->cy);
 
 	HRESULT hRes = ::CLSIDFromProgID(_T("iTunes.Application"), &iTunesCLSID);
 
@@ -80,7 +72,7 @@ LRESULT CChamView::OnCreate(LPCREATESTRUCT lpcs)
 	return 0;
 }
 
-void CChamView::OnDestroy()
+void iTunesView::OnDestroy()
 {
 	if(m_comConnPt)
 	{
@@ -97,7 +89,7 @@ void CChamView::OnDestroy()
 
 
 
-LRESULT CChamView::OnPlay(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/)
+LRESULT iTunesView::OnPlay(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/)
 {
 	CComPtr<IITTrack> rofl;
 	HRESULT hRes = iTunes->get_CurrentTrack(&rofl);
@@ -131,13 +123,13 @@ LRESULT CChamView::OnPlay(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/)
 	AddString(ss.str().c_str());
 	return 0;
 }
-LRESULT CChamView::OnStop(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/)
+LRESULT iTunesView::OnStop(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/)
 {
-	// AddString(L"stop");
+	// //AddString(L"stop");
 	return 0;
 }
-LRESULT CChamView::OnTrackChanged(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/)
+LRESULT iTunesView::OnTrackChanged(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/)
 {
-	// AddString(L"change");
+	// //AddString(L"change");
 	return 0;
 } 

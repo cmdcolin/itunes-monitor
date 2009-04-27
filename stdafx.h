@@ -20,14 +20,14 @@
 
 extern CAppModule _Module;
 
+#include <atltypes.h>
 #include <atlwin.h>
-
 #include <atlframe.h>
-
 #include <atlctrls.h>
 #include <atldlgs.h>
 #include <atlctrlw.h>
 #include <atlcrack.h>
+#include <atlscrl.h>
 
 #include <string>
 #include <sstream>

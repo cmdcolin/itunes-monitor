@@ -1,5 +1,5 @@
 // stdafx.cpp : source file that includes just the standard includes
-//	cham.pch will be the pre-compiled header
+//	iTunes.pch will be the pre-compiled header
 //	stdafx.obj will contain the pre-compiled type information
 
 #include "stdafx.h"
