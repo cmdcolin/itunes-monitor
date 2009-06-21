@@ -5,6 +5,7 @@
 
 #include "Error.h"
 #include "EventHandler.h"
+#include "CAIMEventHandler.h"
 
 class CMainFrame;
 
@@ -16,6 +17,8 @@ class iTunesView : public CScrollWindowImpl<iTunesView, CListBox>
 private:
 
 	CComPtr<IiTunes> iTunes;
+	
+		CAccPtr<CAIMEventHandler> sp;
 	CLSID iTunesCLSID;
 	CMainFrame * parent;
 

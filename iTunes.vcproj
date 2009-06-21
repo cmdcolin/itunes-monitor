@@ -49,7 +49,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;c:\hell\wtl-8.0\include&quot;"
+				AdditionalIncludeDirectories="C:\Hell\accsdk_win32_1_6_8\include;&quot;c:\hell\wtl-8.0\include&quot;"
 				PreprocessorDefinitions="WIN32;_WINDOWS;STRICT;_DEBUG"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -73,6 +73,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				LinkIncremental="2"
+				AdditionalLibraryDirectories="C:\Hell\accsdk_win32_1_6_8\lib\release"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				RandomizedBaseAddress="1"
@@ -197,6 +198,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\AimEventHandler.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Error.cpp"
 				>
 			</File>
@@ -243,6 +248,10 @@
 			>
 			<File
 				RelativePath=".\AboutDlg.h"
+				>
+			</File>
+			<File
+				RelativePath=".\AimEventHandler.h"
 				>
 			</File>
 			<File

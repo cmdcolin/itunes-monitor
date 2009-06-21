@@ -17,24 +17,9 @@ private:
 
 public:
 
-	CITunesEventHandler(iTunesView * m) : main(m), m_dwRefCount(1)
-	{
-		ITypeLib* pITypeLib = NULL;
+	CITunesEventHandler(iTunesView * m);
 
-		HRESULT	 hr = ::LoadRegTypeLib
-			(LIBID_iTunesLib, 
-			1, 5, 
-			0x00, &pITypeLib);
-
-		hr = pITypeLib->GetTypeInfoOfGuid(DIID__IiTunesEvents,
-			&m_pITypeInfo);
-
-
-		pITypeLib->Release();
-	}
-	~CITunesEventHandler(void)
-	{    
-	}
+	~CITunesEventHandler(void) { }
 
 	//
 	// Implements IUnknown

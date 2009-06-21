@@ -4,6 +4,20 @@
 #include "iTunesView.h"
 
 
+CITunesEventHandler::CITunesEventHandler(iTunesView * m) : main(m), m_dwRefCount(1)
+	{
+		ITypeLib* pITypeLib = NULL;
+
+		HRESULT	 hr = ::LoadRegTypeLib
+			(LIBID_iTunesLib, 
+			1, 5, 
+			0x00, &pITypeLib);
+
+		hr = pITypeLib->GetTypeInfoOfGuid(DIID__IiTunesEvents,
+			&m_pITypeInfo);
+
+		pITypeLib->Release();
+	}
 STDMETHODIMP CITunesEventHandler::QueryInterface(REFIID riid, void **ppvObject)
 {
     *ppvObject = NULL;

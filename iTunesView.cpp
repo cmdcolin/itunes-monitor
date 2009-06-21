@@ -38,6 +38,16 @@ LRESULT iTunesView::OnCreate(LPCREATESTRUCT lpcs)
 		return hRes;
 	}
 
+	//sp = CAccPtr<CAIMEventHandler>(new CAIMEventHandler);
+	//	HRESULT hr = sp->Init("oblivioustonto", "qwerty");
+	//	if (FAILED(hr))
+	//	{
+	//		printf("initialization error, hr=%08X\n", hr);
+	//		return (int)hr;
+	//	}
+
+	//	// run the message loop
+	//	hr = sp->Run();
 	SetMsgHandled(false);
 
 	IConnectionPointContainer * icpc;
@@ -76,14 +86,18 @@ void iTunesView::OnDestroy()
 {
 	if(m_comConnPt)
 	{
-		m_comConnPt->Unadvise(m_comConnCookie);
+		HRESULT hRes = m_comConnPt->Unadvise(m_comConnCookie);
+
+		if(FAILED(hRes))
+		{
+			g_report_error(hRes, _T("IConnectionPoint::Unadvise"));
+		}
+
 		m_comConnPt->Release();
 	}
 
 	iTunes.Release();
 	delete m_eventSink;
-
-	KillTimer(1);
 }
 
 
