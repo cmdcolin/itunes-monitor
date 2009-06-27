@@ -159,19 +159,17 @@ LRESULT iTunesView::OnPlay(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/)
 
 	AddString(ss.str().c_str());
 
-	sp->SetStatus("testing plugin 2 - play");
+	sp->SetStatus(ss.str().c_str());
 	
 	return 0;
 }
 LRESULT iTunesView::OnStop(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/)
 {
 	// //AddString(L"stop");
-	sp->SetStatus("testing plugin 2 - stopped");
 	return 0;
 }
 LRESULT iTunesView::OnTrackChanged(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/)
 {
 	// //AddString(L"change");
-	this->sp->SetStatus("testing plugin 2 - changed");
 	return 0;
 } 

@@ -29,7 +29,7 @@ public:
     void OnImReceived(
         IAccSession* piSession, IAccImSession* piImSession, IAccParticipant* piSender, IAccIm* piIm);
 
-	void SetStatus(const char * sc);
+	void SetStatus(const wchar_t * sc);
 	void Quit();
 
 private:

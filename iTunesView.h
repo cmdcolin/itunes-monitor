@@ -17,7 +17,7 @@ class iTunesView : public CScrollWindowImpl<iTunesView, CListBox>
 private:
 
 	CComPtr<IiTunes> iTunes;
-	CAccPtr<AimEventHandler> sp;
+	AimEventHandler * sp;
 	HANDLE hThread;
 	
 	CLSID iTunesCLSID;
@@ -60,4 +60,9 @@ public:
 	LRESULT OnPlay(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/);
 	LRESULT OnStop(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/);
 	LRESULT OnTrackChanged(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/);
+
+	void SetAimHandle(AimEventHandler * aim)
+	{
+		sp = aim;
+	}
 };
