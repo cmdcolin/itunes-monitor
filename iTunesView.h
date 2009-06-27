@@ -4,8 +4,8 @@
 #include "resource.h"
 
 #include "Error.h"
-#include "EventHandler.h"
-#include "CAIMEventHandler.h"
+#include "ItunesEventHandler.h"
+#include "AimEventHandler.h"
 
 class CMainFrame;
 
@@ -17,12 +17,13 @@ class iTunesView : public CScrollWindowImpl<iTunesView, CListBox>
 private:
 
 	CComPtr<IiTunes> iTunes;
+	CAccPtr<AimEventHandler> sp;
+	HANDLE hThread;
 	
-		CAccPtr<CAIMEventHandler> sp;
 	CLSID iTunesCLSID;
 	CMainFrame * parent;
 
-	CITunesEventHandler * m_eventSink;
+	iTunesEventHandler * m_eventSink;
     IConnectionPoint* m_comConnPt;
 	DWORD m_comConnCookie;
 

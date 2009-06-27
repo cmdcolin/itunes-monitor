@@ -1,10 +1,10 @@
 #include "stdafx.h"
 
-#include "EventHandler.h"
+#include "ItunesEventHandler.h"
 #include "iTunesView.h"
 
 
-CITunesEventHandler::CITunesEventHandler(iTunesView * m) : main(m), m_dwRefCount(1)
+iTunesEventHandler::iTunesEventHandler(iTunesView * m) : main(m), m_dwRefCount(1)
 	{
 		ITypeLib* pITypeLib = NULL;
 
@@ -18,7 +18,7 @@ CITunesEventHandler::CITunesEventHandler(iTunesView * m) : main(m), m_dwRefCount
 
 		pITypeLib->Release();
 	}
-STDMETHODIMP CITunesEventHandler::QueryInterface(REFIID riid, void **ppvObject)
+STDMETHODIMP iTunesEventHandler::QueryInterface(REFIID riid, void **ppvObject)
 {
     *ppvObject = NULL;
     if (riid == IID_IUnknown || riid == DIID__IiTunesEvents) 
@@ -30,12 +30,12 @@ STDMETHODIMP CITunesEventHandler::QueryInterface(REFIID riid, void **ppvObject)
     }
 }
 
-STDMETHODIMP_(ULONG) CITunesEventHandler::AddRef(void)
+STDMETHODIMP_(ULONG) iTunesEventHandler::AddRef(void)
 {    
 	return InterlockedIncrement(&m_dwRefCount);
 }
 
-STDMETHODIMP_(ULONG) CITunesEventHandler::Release(void)
+STDMETHODIMP_(ULONG) iTunesEventHandler::Release(void)
 {
     if (InterlockedDecrement(&m_dwRefCount) == 0)
     {
@@ -45,7 +45,7 @@ STDMETHODIMP_(ULONG) CITunesEventHandler::Release(void)
     return m_dwRefCount;
 }
 
-STDMETHODIMP CITunesEventHandler::GetTypeInfoCount(UINT *pctinfo)
+STDMETHODIMP iTunesEventHandler::GetTypeInfoCount(UINT *pctinfo)
 {
     //this method is not called by iTunes
     if (pctinfo)
@@ -54,20 +54,20 @@ STDMETHODIMP CITunesEventHandler::GetTypeInfoCount(UINT *pctinfo)
     return S_OK;
 }
 
-STDMETHODIMP CITunesEventHandler::GetTypeInfo(UINT iTInfo, LCID lcid, ITypeInfo **ppTInfo)
+STDMETHODIMP iTunesEventHandler::GetTypeInfo(UINT iTInfo, LCID lcid, ITypeInfo **ppTInfo)
 {
     //this method is not called by iTunes
     return TYPE_E_ELEMENTNOTFOUND;
 }
 
-STDMETHODIMP CITunesEventHandler::GetIDsOfNames(REFIID riid, LPOLESTR *rgszNames, UINT cNames, 
+STDMETHODIMP iTunesEventHandler::GetIDsOfNames(REFIID riid, LPOLESTR *rgszNames, UINT cNames, 
                                                  LCID lcid, DISPID *rgDispId)
 {
     //this method is not called by iTunes
     return E_INVALIDARG;
 }
 
-STDMETHODIMP CITunesEventHandler::Invoke(DISPID dispIdMember, REFIID riid, LCID lcid, WORD wFlags, 
+STDMETHODIMP iTunesEventHandler::Invoke(DISPID dispIdMember, REFIID riid, LCID lcid, WORD wFlags, 
                                           DISPPARAMS *pDispParams, VARIANT *pVarResult,
                                           EXCEPINFO *pExcepInfo, UINT *puArgErr)
 {

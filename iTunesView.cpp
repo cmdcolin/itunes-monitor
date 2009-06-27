@@ -8,6 +8,25 @@
 #include "mainFrm.h"
 #include "iTunesView.h"
 
+DWORD WINAPI Thready(LPVOID lpParam)
+{
+	iTunesView * itv = (iTunesView *) lpParam;
+
+    // create the app object and sign on
+    CAccPtr<AimEventHandler> sp(new AimEventHandler);
+	HRESULT hr = (sp) ? sp->Init(itv, "oblivioustonto",  "qwerty") : E_OUTOFMEMORY;
+
+    if (FAILED(hr))
+    {
+        printf("initialization error, hr=%08X\n", hr);
+        return (int)hr;
+    }
+            
+    // run the message loop
+    hr = sp->Run();
+    sp->Term();
+	return 0;
+}
 
 
 BOOL iTunesView::PreTranslateMessage(MSG* pMsg)
@@ -37,17 +56,9 @@ LRESULT iTunesView::OnCreate(LPCREATESTRUCT lpcs)
 		g_report_error(hRes, _T("IiTunes::CoCreateInstance"));
 		return hRes;
 	}
+	
 
-	//sp = CAccPtr<CAIMEventHandler>(new CAIMEventHandler);
-	//	HRESULT hr = sp->Init("oblivioustonto", "qwerty");
-	//	if (FAILED(hr))
-	//	{
-	//		printf("initialization error, hr=%08X\n", hr);
-	//		return (int)hr;
-	//	}
-
-	//	// run the message loop
-	//	hr = sp->Run();
+	
 	SetMsgHandled(false);
 
 	IConnectionPointContainer * icpc;
@@ -68,7 +79,7 @@ LRESULT iTunesView::OnCreate(LPCREATESTRUCT lpcs)
 		return hRes;
 	}
 
-	m_eventSink = new CITunesEventHandler(this);
+	m_eventSink = new iTunesEventHandler(this);
 	hRes = m_comConnPt->Advise(m_eventSink, &m_comConnCookie);
 
 	if(FAILED(hRes))
@@ -79,11 +90,23 @@ LRESULT iTunesView::OnCreate(LPCREATESTRUCT lpcs)
 
 	icpc->Release();
 
+	
+	DWORD dwThreadId = 0;
+
+	hThread = CreateThread
+		(0, 0, Thready, (LPVOID) this, 0, &dwThreadId);
+	
+	//WaitForSingleObject(hThread, INFINITE);
+
+
 	return 0;
 }
 
 void iTunesView::OnDestroy()
 {
+	sp->Quit();
+	CloseHandle(hThread);
+
 	if(m_comConnPt)
 	{
 		HRESULT hRes = m_comConnPt->Unadvise(m_comConnCookie);
@@ -135,15 +158,20 @@ LRESULT iTunesView::OnPlay(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/)
 		<< (pszTrack.m_psz ? pszTrack.m_psz : _T("N/A"));
 
 	AddString(ss.str().c_str());
+
+	sp->SetStatus("testing plugin 2 - play");
+	
 	return 0;
 }
 LRESULT iTunesView::OnStop(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/)
 {
 	// //AddString(L"stop");
+	sp->SetStatus("testing plugin 2 - stopped");
 	return 0;
 }
 LRESULT iTunesView::OnTrackChanged(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/)
 {
 	// //AddString(L"change");
+	this->sp->SetStatus("testing plugin 2 - changed");
 	return 0;
 } 

@@ -3,7 +3,7 @@
 #include "stdafx.h"
 class iTunesView;
 
-class CITunesEventHandler : public _IiTunesEvents /* public IUnknown, public IDispatch */
+class iTunesEventHandler : public _IiTunesEvents /* public IUnknown, public IDispatch */
 {
 private:
 
@@ -17,9 +17,9 @@ private:
 
 public:
 
-	CITunesEventHandler(iTunesView * m);
+	iTunesEventHandler(iTunesView * m);
 
-	~CITunesEventHandler(void) { }
+	~iTunesEventHandler(void) { }
 
 	//
 	// Implements IUnknown

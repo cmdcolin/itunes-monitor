@@ -206,7 +206,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\EventHandler.cpp"
+				RelativePath=".\ItunesEventHandler.cpp"
 				>
 			</File>
 			<File
@@ -259,7 +259,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\EventHandler.h"
+				RelativePath=".\ItunesEventHandler.h"
 				>
 			</File>
 			<File
