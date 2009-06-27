@@ -8,8 +8,8 @@
 #include "stdafx.h"
 #include "resource.h"
 
-#include "iTunesView.h"
-#include "aboutdlg.h"
+#include "AppView.h"
+#include "AboutDlg.h"
 #include "MainFrm.h"
 
 CAppModule _Module;

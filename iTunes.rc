@@ -104,6 +104,7 @@ BEGIN
     END
 END
 
+
 /////////////////////////////////////////////////////////////////////////////
 //
 // Icon
@@ -119,18 +120,26 @@ IDR_MAINFRAME           ICON                    "res\\iTunes.ico"
 //
 
 IDD_ABOUTBOX DIALOG  0, 0, 187, 102
-STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "About"
 FONT 8, "MS Sans Serif"
 BEGIN
     DEFPUSHBUTTON   "OK",IDOK,130,81,50,14
-    CTEXT           "iTunes Application v1.0\n\n(c) Copyright 2008",IDC_STATIC,25,57,78,
-                    32
+    CTEXT           "iTunes Application v1.0\n\n(c) Copyright 2008",IDC_STATIC,25,57,78,32
     ICON            IDR_MAINFRAME,IDC_STATIC,55,26,18,20
     GROUPBOX        "",IDC_STATIC,7,7,115,88
 END
 
-
+IDD_USERPROPS DIALOGEX 0, 0, 316, 180
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,205,159,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,259,159,50,14
+	EDITTEXT		IDC_USERNAME,200,200,200,20
+	EDITTEXT		IDC_PASSWORD,200,230,200,20
+END
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -147,6 +156,22 @@ BEGIN
         RIGHTMARGIN, 180
         TOPMARGIN, 7
         BOTTOMMARGIN, 95
+    END
+
+    IDD_USERPROPS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 309
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 173
+    END
+
+    IDD_FORMVIEW, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 178
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 86
     END
 END
 #endif    // APSTUDIO_INVOKED
@@ -198,21 +223,27 @@ BEGIN
     BEGIN
         BLOCK "040904B0"
         BEGIN
-            VALUE "CompanyName", "\0"
-            VALUE "FileDescription", "iTunes Module\0"
-            VALUE "FileVersion", "1, 0, 0, 1\0"
-            VALUE "InternalName", "iTunes\0"
-            VALUE "LegalCopyright", "Copyright 2008\0"
-            VALUE "OriginalFilename", "iTunes.exe\0"
-            VALUE "ProductName", "iTunes Module\0"
-            VALUE "ProductVersion", "1, 0, 0, 1\0"
+            VALUE "FileDescription", "iTunes Module"
+            VALUE "FileVersion", "1, 0, 0, 1"
+            VALUE "InternalName", "iTunes"
+            VALUE "LegalCopyright", "Copyright 2008"
+            VALUE "OriginalFilename", "iTunes.exe"
+            VALUE "ProductName", "iTunes Module"
+            VALUE "ProductVersion", "1, 0, 0, 1"
         END
     END
     BLOCK "VarFileInfo"
     BEGIN
-        VALUE "Translation", 0x0409, 0x04B0
+        VALUE "Translation", 0x409, 1200
     END
 END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// EDITTEXT
+//
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -221,7 +252,7 @@ END
 
 STRINGTABLE 
 BEGIN
-    IDR_MAINFRAME	"iTunes Now Playing"
+    IDR_MAINFRAME           "iTunes Now Playing"
 END
 
 STRINGTABLE 
@@ -301,6 +332,10 @@ END
 STRINGTABLE 
 BEGIN
     ATL_IDS_IDLEMESSAGE     "Ready"
+END
+
+STRINGTABLE 
+BEGIN
     ATL_IDS_MRU_FILE        "Open this document"
 END
 
@@ -308,5 +343,3 @@ END
 /////////////////////////////////////////////////////////////////////////////
 
 
-#ifndef APSTUDIO_INVOKED
-#endif    // not APSTUDIO_INVOKED

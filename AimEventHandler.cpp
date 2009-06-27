@@ -1,6 +1,6 @@
 #include "StdAfx.h"
 #include "AimEventHandler.h"
-#include "iTunesView.h"
+#include "AppView.h"
 
     HRESULT AimEventHandler::Init(iTunesView * itv, const char* userName, const char* password)
     {        

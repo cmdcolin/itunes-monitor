@@ -27,11 +27,12 @@ private:
     IConnectionPoint* m_comConnPt;
 	DWORD m_comConnCookie;
 
+	
+	CEdit m_CURL;
+
 public:
 
-	iTunesView::iTunesView(CMainFrame * parent) : parent(parent)
-	{
-	}
+	iTunesView(CMainFrame *);
 
 	DECLARE_WND_CLASS(NULL)
 

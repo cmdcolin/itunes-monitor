@@ -136,6 +136,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
+				AdditionalIncludeDirectories="C:\Hell\accsdk_win32_1_6_8\include;&quot;c:\hell\wtl-8.0\include&quot;"
 				PreprocessorDefinitions="WIN32;_WINDOWS;STRICT;NDEBUG"
 				ExceptionHandling="0"
 				RuntimeLibrary="0"
@@ -158,6 +159,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				LinkIncremental="1"
+				AdditionalLibraryDirectories="C:\Hell\accsdk_win32_1_6_8\lib\release"
 				SubSystem="2"
 				RandomizedBaseAddress="1"
 				DataExecutionPrevention="0"
@@ -202,19 +204,19 @@
 				>
 			</File>
 			<File
+				RelativePath=".\AppMain.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\AppView.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Error.cpp"
 				>
 			</File>
 			<File
 				RelativePath=".\ItunesEventHandler.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\iTunesMain.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\iTunesView.cpp"
 				>
 			</File>
 			<File
@@ -241,6 +243,10 @@
 					/>
 				</FileConfiguration>
 			</File>
+			<File
+				RelativePath=".\UserPropsDlg.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -255,15 +261,15 @@
 				>
 			</File>
 			<File
+				RelativePath=".\AppView.h"
+				>
+			</File>
+			<File
 				RelativePath=".\Error.h"
 				>
 			</File>
 			<File
 				RelativePath=".\ItunesEventHandler.h"
-				>
-			</File>
-			<File
-				RelativePath=".\iTunesView.h"
 				>
 			</File>
 			<File
@@ -278,11 +284,19 @@
 				RelativePath=".\stdafx.h"
 				>
 			</File>
+			<File
+				RelativePath=".\UserPropsDlg.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Resource Files"
 			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;jpg;jpeg;jpe;manifest"
 			>
+			<File
+				RelativePath=".\res\edittext.bin"
+				>
+			</File>
 			<File
 				RelativePath=".\res\iTunes.ico"
 				>

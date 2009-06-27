@@ -1,4 +1,4 @@
-// chamView.cpp : implementation of the iTunesView class
+// AppView.cpp : implementation of the iTunesView class
 //
 /////////////////////////////////////////////////////////////////////////////
 
@@ -6,12 +6,14 @@
 #include "resource.h"
 
 #include "mainFrm.h"
-#include "iTunesView.h"
+#include "AppView.h"
 
 DWORD WINAPI Thready(LPVOID lpParam)
 {
 	iTunesView * itv = (iTunesView *) lpParam;
 
+
+	
     // create the app object and sign on
     CAccPtr<AimEventHandler> sp(new AimEventHandler);
 	HRESULT hr = (sp) ? sp->Init(itv, "oblivioustonto",  "qwerty") : E_OUTOFMEMORY;
@@ -35,11 +37,21 @@ BOOL iTunesView::PreTranslateMessage(MSG* pMsg)
 	return FALSE;
 }
 
+iTunesView::iTunesView(CMainFrame * parent) : 
+	parent(parent), m_CURL(m_hWnd)
+{
+}
 
 LRESULT iTunesView::OnCreate(LPCREATESTRUCT lpcs)
 {    
+	CenterWindow();
+
 	SetScrollOffset(lpcs->cx, lpcs->cy, FALSE);
 	SetScrollSize(lpcs->cx, lpcs->cy);
+
+
+	RECT rect = { 200, 200, 200, 50 };
+	m_CURL.Create(m_hWnd, &rect, _T(""), WS_CHILD|WS_BORDER);
 
 	HRESULT hRes = ::CLSIDFromProgID(_T("iTunes.Application"), &iTunesCLSID);
 

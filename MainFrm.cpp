@@ -5,8 +5,9 @@
 #include "stdafx.h"
 #include "resource.h"
 
-#include "aboutdlg.h"
-#include "iTunesView.h"
+#include "AboutDlg.h"
+#include "UserPropsDlg.h"
+#include "AppView.h"
 #include "MainFrm.h"
 
 BOOL CMainFrame::PreTranslateMessage(MSG* pMsg)
@@ -108,6 +109,14 @@ LRESULT CMainFrame::OnViewStatusBar(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*h
 LRESULT CMainFrame::OnAppAbout(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/)
 {
 	CAboutDlg dlg;
+	dlg.DoModal();
+	return 0;
+}
+
+
+LRESULT CMainFrame::OnAppUserProps(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/)
+{
+	CUserPropsDlg dlg;
 	dlg.DoModal();
 	return 0;
 }
