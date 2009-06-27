@@ -1,23 +1,24 @@
 #include "stdafx.h"
 
 #include "ItunesEventHandler.h"
-#include "iTunesView.h"
+#include "AppView.h"
 
 
 iTunesEventHandler::iTunesEventHandler(iTunesView * m) : main(m), m_dwRefCount(1)
-	{
-		ITypeLib* pITypeLib = NULL;
+{
+	ITypeLib* pITypeLib = NULL;
 
-		HRESULT	 hr = ::LoadRegTypeLib
-			(LIBID_iTunesLib, 
-			1, 5, 
-			0x00, &pITypeLib);
+	HRESULT	 hr = ::LoadRegTypeLib
+		(LIBID_iTunesLib, 
+		1, 5, 
+		0x00, &pITypeLib);
 
-		hr = pITypeLib->GetTypeInfoOfGuid(DIID__IiTunesEvents,
-			&m_pITypeInfo);
+	hr = pITypeLib->GetTypeInfoOfGuid(DIID__IiTunesEvents,
+		&m_pITypeInfo);
 
-		pITypeLib->Release();
-	}
+	pITypeLib->Release();
+}
+
 STDMETHODIMP iTunesEventHandler::QueryInterface(REFIID riid, void **ppvObject)
 {
     *ppvObject = NULL;

@@ -26,6 +26,7 @@ BOOL CMainFrame::OnIdle()
 
 LRESULT CMainFrame::OnCreate(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& /*bHandled*/)
 {
+	hThread = 0;
 	// create command bar window
 	HWND hWndCmdBar = m_CmdBar.Create(m_hWnd, rcDefault, NULL, ATL_SIMPLE_CMDBAR_PANE_STYLE);
 	// attach menu
@@ -118,5 +119,40 @@ LRESULT CMainFrame::OnAppUserProps(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hW
 {
 	CUserPropsDlg dlg;
 	dlg.DoModal();
+
+	m_view.SetUserData(dlg.username, dlg.password);
+
+	if(hThread)
+		CloseHandle(hThread);
+
+	DWORD dwThreadId = 0;
+
+	hThread = CreateThread
+		(0, 0, AimThread, (LPVOID) &m_view, 0, &dwThreadId);
+
+	return 0;
+}
+
+
+DWORD WINAPI CMainFrame::AimThread(LPVOID lpParam)
+{
+	iTunesView * itv = (iTunesView *) lpParam;
+
+
+	
+    // create the app object and sign on
+    CAccPtr<AimEventHandler> sp(new AimEventHandler);
+	HRESULT hr = (sp) ? sp->Init(itv, itv->username, itv->password) : E_OUTOFMEMORY;
+//HRESULT hr = (sp) ? sp->Init(itv, _T("oblivioustonto"), _T("maynard")) : E_OUTOFMEMORY;
+
+    if (FAILED(hr))
+    {
+        printf("initialization error, hr=%08X\n", hr);
+        return (int)hr;
+    }
+            
+    // run the message loop
+    hr = sp->Run();
+    sp->Term();
 	return 0;
 }

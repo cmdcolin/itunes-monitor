@@ -14,6 +14,7 @@ class CMainFrame;
 
 class iTunesView : public CScrollWindowImpl<iTunesView, CListBox>
 {
+
 private:
 
 	CComPtr<IiTunes> iTunes;
@@ -31,6 +32,8 @@ private:
 	CEdit m_CURL;
 
 public:
+
+	TCHAR username[256], password[256];
 
 	iTunesView(CMainFrame *);
 
@@ -65,5 +68,13 @@ public:
 	void SetAimHandle(AimEventHandler * aim)
 	{
 		sp = aim;
+	}
+
+	void SetUserData(LPCTSTR user, LPCTSTR pass)
+	{
+		_tcscpy(username, user);
+		_tcscpy(password, pass);
+
+		return;
 	}
 };

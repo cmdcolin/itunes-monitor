@@ -15,6 +15,10 @@ public:
 
 	iTunesView m_view;
 	CCommandBarCtrl m_CmdBar;
+	HANDLE hThread;
+
+	
+	static DWORD WINAPI AimThread(LPVOID lpParam);
 
 	CMainFrame() : m_view(this) { }
 

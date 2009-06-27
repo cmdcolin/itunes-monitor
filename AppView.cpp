@@ -8,27 +8,7 @@
 #include "mainFrm.h"
 #include "AppView.h"
 
-DWORD WINAPI Thready(LPVOID lpParam)
-{
-	iTunesView * itv = (iTunesView *) lpParam;
 
-
-	
-    // create the app object and sign on
-    CAccPtr<AimEventHandler> sp(new AimEventHandler);
-	HRESULT hr = (sp) ? sp->Init(itv, "oblivioustonto",  "qwerty") : E_OUTOFMEMORY;
-
-    if (FAILED(hr))
-    {
-        printf("initialization error, hr=%08X\n", hr);
-        return (int)hr;
-    }
-            
-    // run the message loop
-    hr = sp->Run();
-    sp->Term();
-	return 0;
-}
 
 
 BOOL iTunesView::PreTranslateMessage(MSG* pMsg)
@@ -103,10 +83,6 @@ LRESULT iTunesView::OnCreate(LPCREATESTRUCT lpcs)
 	icpc->Release();
 
 	
-	DWORD dwThreadId = 0;
-
-	hThread = CreateThread
-		(0, 0, Thready, (LPVOID) this, 0, &dwThreadId);
 	
 	//WaitForSingleObject(hThread, INFINITE);
 

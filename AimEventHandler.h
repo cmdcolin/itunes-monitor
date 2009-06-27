@@ -18,7 +18,7 @@ class AimEventHandler : public CAccEventSink
 public:
 
 
-    HRESULT Init(iTunesView * itv, const char* userName, const char* password);
+    HRESULT Init(iTunesView * itv, LPCTSTR userName, LPCTSTR password);
     HRESULT Run();
     void Term();
 

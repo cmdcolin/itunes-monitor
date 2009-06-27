@@ -12,6 +12,13 @@ LRESULT CUserPropsDlg::OnInitDialog(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*l
 
 LRESULT CUserPropsDlg::OnCloseCmd(WORD /*wNotifyCode*/, WORD wID, HWND /*hWndCtl*/, BOOL& /*bHandled*/)
 {
+	CEdit x(GetDlgItem(IDC_USERNAME));
+	CEdit y(GetDlgItem(IDC_PASSWORD));
+
+	x.GetWindowText(username, sizeof(username));
+	y.GetWindowText(password, sizeof(password));
+
+	
 	EndDialog(wID);
 	return 0;
 }

@@ -4,7 +4,12 @@
 
 class CUserPropsDlg : public CDialogImpl<CUserPropsDlg>
 {
+
 public:
+	
+	TCHAR username[256];
+	TCHAR password[256];
+
 	enum { IDD = IDD_USERPROPS };
 
 	BEGIN_MSG_MAP(CUserPropsDlg)
