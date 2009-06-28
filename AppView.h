@@ -12,7 +12,7 @@ class CMainFrame;
 
 
 
-class iTunesView : public CScrollWindowImpl<iTunesView, CListBox>
+class AppView : public CScrollWindowImpl<AppView, CListBox>
 {
 
 private:
@@ -35,15 +35,15 @@ public:
 	TCHAR username[256], password[256];
 	AimEventHandler * sp;
 
-	iTunesView(CMainFrame *);
+	AppView(CMainFrame *);
 
 	DECLARE_WND_CLASS(NULL)
 
 	BOOL PreTranslateMessage(MSG* pMsg);
 
-	BEGIN_MSG_MAP(iTunesView)  
+	BEGIN_MSG_MAP(AppView)  
 
-//		CHAIN_MSG_MAP(CScrollWindowImpl<iTunesView>)
+//		CHAIN_MSG_MAP(CScrollWindowImpl<AppView>)
 
 		MSG_WM_CREATE(OnCreate)
 		MSG_WM_DESTROY(OnDestroy)

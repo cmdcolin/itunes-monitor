@@ -28,6 +28,9 @@ LRESULT CAboutDlg::OnInitDialog(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lPara
 
 	return TRUE;
 }
+
+
+
 BOOL GetAppVersion( LPCTSTR LibName, WORD *MajorVersion, WORD *MinorVersion, WORD *BuildNumber, WORD *RevisionNumber )
 {
 	DWORD dwHandle, dwLen;
@@ -59,6 +62,9 @@ BOOL GetAppVersion( LPCTSTR LibName, WORD *MajorVersion, WORD *MinorVersion, WOR
 	free (lpData);
 	return FALSE;
 }
+
+
+
 LRESULT CAboutDlg::OnCloseCmd(WORD /*wNotifyCode*/, WORD wID, HWND /*hWndCtl*/, BOOL& /*bHandled*/)
 {
 	EndDialog(wID);

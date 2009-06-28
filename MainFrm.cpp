@@ -162,7 +162,7 @@ LRESULT CMainFrame::OnDisconnect(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWnd
 
 DWORD WINAPI CMainFrame::AimThread(LPVOID lpParam)
 {
-	iTunesView * itv = (iTunesView *) lpParam;
+	AppView * itv = (AppView *) lpParam;
 
 
 	
@@ -184,20 +184,23 @@ DWORD WINAPI CMainFrame::AimThread(LPVOID lpParam)
 }
 
 
-LRESULT CMainFrame::OnSysCommand(UINT /*uMsg*/, WPARAM wParam, LPARAM /*lParam*/, BOOL& /*bHandled*/)
+LRESULT CMainFrame::OnSysCommand(UINT /*uMsg*/, WPARAM wParam, LPARAM /*lParam*/, BOOL& bHandled)
 {
 	if(SC_MINIMIZE == wParam)
 	{
 		ShowWindow(SW_HIDE); //hWnd is the handle of the application window
 		return TRUE;
 	}
-	if(SC_CLOSE == wParam)
+	else if(SC_CLOSE == wParam)
 	{
 		PostMessage(WM_CLOSE);
-		return 0;
+		return TRUE;
 	}
+	else
+		bHandled = false;
 
-	return 1;
+
+	return 0;
 }
 
 

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "stdafx.h"
-class iTunesView;
+class AppView;
 
 class iTunesEventHandler : public _IiTunesEvents /* public IUnknown, public IDispatch */
 {
@@ -13,11 +13,11 @@ private:
 
 
 
-	 iTunesView * main;
+	 AppView * main;
 
 public:
 
-	iTunesEventHandler(iTunesView * m);
+	iTunesEventHandler(AppView * m);
 
 	~iTunesEventHandler(void) { }
 

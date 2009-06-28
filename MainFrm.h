@@ -18,7 +18,7 @@ public:
 
 	DECLARE_FRAME_WND_CLASS(NULL, IDR_MAINFRAME)
 
-	iTunesView m_view;
+	AppView m_view;
 
 	CCommandBarCtrl m_CmdBar;
 	HANDLE hThread;

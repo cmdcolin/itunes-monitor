@@ -95,6 +95,8 @@ BEGIN
     BEGIN
         MENUITEM "E&xit...",              ID_APP_EXIT
         MENUITEM "&About...",          ID_APP_ABOUT
+		MENUITEM "Minimize to tray", -1
+		MENUITEM "Maximize", -1
     END
 END
 
@@ -106,7 +108,7 @@ END
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-IDR_MAINFRAME           ICON                    "iTunes.ico"
+IDR_MAINFRAME           ICON                    "iTunes 2.ico"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -185,8 +187,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,3,1,138
- PRODUCTVERSION 1,3,1,138
+ FILEVERSION 1,3,1,146
+ PRODUCTVERSION 1,3,1,146
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -202,12 +204,12 @@ BEGIN
         BLOCK "040904B0"
         BEGIN
             VALUE "FileDescription", "iTunes Module"
-            VALUE "FileVersion", "1, 3, 1, 138"
+            VALUE "FileVersion", "1, 3, 1, 146"
             VALUE "InternalName", "iTunes"
             VALUE "LegalCopyright", "Copyright 2008"
             VALUE "OriginalFilename", "iTunes.exe"
             VALUE "ProductName", "iTunes Module"
-            VALUE "ProductVersion", "1, 3, 1, 138"
+            VALUE "ProductVersion", "1, 3, 1, 146"
         END
     END
     BLOCK "VarFileInfo"

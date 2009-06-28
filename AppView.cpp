@@ -1,4 +1,4 @@
-// AppView.cpp : implementation of the iTunesView class
+// AppView.cpp : implementation of the AppView class
 //
 /////////////////////////////////////////////////////////////////////////////
 
@@ -11,18 +11,18 @@
 
 
 
-BOOL iTunesView::PreTranslateMessage(MSG* pMsg)
+BOOL AppView::PreTranslateMessage(MSG* pMsg)
 {
 	pMsg;
 	return FALSE;
 }
 
-iTunesView::iTunesView(CMainFrame * parent) : 
+AppView::AppView(CMainFrame * parent) : 
 	parent(parent), m_CURL(m_hWnd), sp(0), hThread(0)
 {
 }
 
-LRESULT iTunesView::OnCreate(LPCREATESTRUCT lpcs)
+LRESULT AppView::OnCreate(LPCREATESTRUCT lpcs)
 {    
 	CenterWindow();
 
@@ -90,7 +90,7 @@ LRESULT iTunesView::OnCreate(LPCREATESTRUCT lpcs)
 	return 0;
 }
 
-void iTunesView::OnDestroy()
+void AppView::OnDestroy()
 {
 	if(sp)
 		sp->Quit();
@@ -117,7 +117,7 @@ void iTunesView::OnDestroy()
 
 
 
-LRESULT iTunesView::OnPlay(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/)
+LRESULT AppView::OnPlay(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/)
 {
 	CComPtr<IITTrack> rofl;
 	HRESULT hRes = iTunes->get_CurrentTrack(&rofl);
@@ -154,12 +154,12 @@ LRESULT iTunesView::OnPlay(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/)
 	
 	return 0;
 }
-LRESULT iTunesView::OnStop(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/)
+LRESULT AppView::OnStop(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/)
 {
 	// //AddString(L"stop");
 	return 0;
 }
-LRESULT iTunesView::OnTrackChanged(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/)
+LRESULT AppView::OnTrackChanged(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/)
 {
 	// //AddString(L"change");
 	return 0;

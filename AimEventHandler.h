@@ -12,13 +12,13 @@
 #endif
 
 using namespace AIMCC;
-class iTunesView;
+class AppView;
 class AimEventHandler : public CAccEventSink
 {
 public:
 
 
-    HRESULT Init(iTunesView * itv, LPCTSTR userName, LPCTSTR password);
+    HRESULT Init(AppView * itv, LPCTSTR userName, LPCTSTR password);
     HRESULT Run();
     void Term();
 
@@ -34,6 +34,6 @@ public:
 
 private:
 
-	iTunesView * itv;
+	AppView * itv;
     CAccPtr<IAccSession> m_sp;        
 };

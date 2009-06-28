@@ -4,7 +4,7 @@
 #include "AppView.h"
 
 
-iTunesEventHandler::iTunesEventHandler(iTunesView * m) : main(m), m_dwRefCount(1)
+iTunesEventHandler::iTunesEventHandler(AppView * m) : main(m), m_dwRefCount(1)
 {
 	ITypeLib* pITypeLib = NULL;
 

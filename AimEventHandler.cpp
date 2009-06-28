@@ -2,7 +2,7 @@
 #include "AimEventHandler.h"
 #include "AppView.h"
 
-HRESULT AimEventHandler::Init(iTunesView * itv, LPCTSTR username, LPCTSTR password)
+HRESULT AimEventHandler::Init(AppView * itv, LPCTSTR username, LPCTSTR password)
 {        
 	this->itv = itv;
 	m_sp = 0;
