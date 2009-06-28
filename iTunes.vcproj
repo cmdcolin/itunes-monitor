@@ -72,6 +72,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="version.lib"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="C:\Hell\accsdk_win32_1_6_8\lib\release"
 				GenerateDebugInformation="true"
@@ -158,6 +159,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="version.lib"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="C:\Hell\accsdk_win32_1_6_8\lib\release"
 				SubSystem="2"
@@ -282,6 +284,10 @@
 			</File>
 			<File
 				RelativePath=".\stdafx.h"
+				>
+			</File>
+			<File
+				RelativePath=".\TrayIconImpl.h"
 				>
 			</File>
 			<File

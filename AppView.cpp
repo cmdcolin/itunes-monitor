@@ -18,7 +18,7 @@ BOOL iTunesView::PreTranslateMessage(MSG* pMsg)
 }
 
 iTunesView::iTunesView(CMainFrame * parent) : 
-	parent(parent), m_CURL(m_hWnd)
+	parent(parent), m_CURL(m_hWnd), sp(0), hThread(0)
 {
 }
 
@@ -92,8 +92,11 @@ LRESULT iTunesView::OnCreate(LPCREATESTRUCT lpcs)
 
 void iTunesView::OnDestroy()
 {
-	sp->Quit();
-	CloseHandle(hThread);
+	if(sp)
+		sp->Quit();
+
+	if(hThread)
+		CloseHandle(hThread);
 
 	if(m_comConnPt)
 	{

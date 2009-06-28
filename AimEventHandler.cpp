@@ -5,6 +5,7 @@
 HRESULT AimEventHandler::Init(iTunesView * itv, LPCTSTR username, LPCTSTR password)
 {        
 	this->itv = itv;
+	m_sp = 0;
 
 	// 1. create aimcc main object, hook up for events
 	// 2. set information to identify this client
@@ -81,6 +82,7 @@ void AimEventHandler::OnStateChange(
 
 
 	itv->AddString(buf);
+
 	if (state == AccSessionState_Offline)
 		AccPostQuit(hr);        
 }   
@@ -114,10 +116,12 @@ void AimEventHandler::OnImReceived(
 
 void AimEventHandler::SetStatus(const wchar_t * sc)
 {
-	m_sp->put_Property(AccSessionProp_StatusText, CAccVariant(sc)); 
+	if(m_sp)
+		m_sp->put_Property(AccSessionProp_StatusText, CAccVariant(sc)); 
 }
 
 void AimEventHandler::Quit()
 {
-	m_sp->SignOff();       
+	if(m_sp)
+		m_sp->SignOff();
 }

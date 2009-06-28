@@ -13,7 +13,12 @@
 #define IDR_EDITTEXT1                   202
 #define IDC_USERNAME                   203
 #define IDC_PASSWORD                   204
-
+#define IDR_TRAYPOPUP					205
+#define ID_HIDE                         32775
+#define ID_SHOW                         32776
+#define ID_CONNECT						206
+#define ID_DISCONNECT					207
+#define IDC_LABEL						208
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED

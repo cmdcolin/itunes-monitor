@@ -10,6 +10,7 @@
 #include "AppView.h"
 #include "MainFrm.h"
 
+
 BOOL CMainFrame::PreTranslateMessage(MSG* pMsg)
 {
 	if(CFrameWindowImpl<CMainFrame>::PreTranslateMessage(pMsg))
@@ -36,6 +37,17 @@ LRESULT CMainFrame::OnCreate(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/
 	// remove old menu
 	SetMenu(NULL);
 
+	HICON hIconSmall = (HICON)::LoadImage(_Module.GetResourceInstance(),
+		MAKEINTRESOURCE(IDR_MAINFRAME), 
+		IMAGE_ICON,
+		::GetSystemMetrics(SM_CXSMICON),
+		::GetSystemMetrics(SM_CYSMICON),
+		LR_DEFAULTCOLOR);
+
+	InstallIcon(_T("Tooltip text"), hIconSmall, IDR_TRAYPOPUP);
+	SetDefaultItem(ID_SHOW);
+
+
 	HWND hWndToolBar = CreateSimpleToolBarCtrl(m_hWnd, IDR_MAINFRAME, FALSE, ATL_SIMPLE_TOOLBAR_PANE_STYLE);
 
 	CreateSimpleReBar(ATL_SIMPLE_REBAR_NOBORDER_STYLE);
@@ -44,8 +56,12 @@ LRESULT CMainFrame::OnCreate(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/
 
 	CreateSimpleStatusBar();
 
-	CRect r(0, 0, 800, 600);
-	m_hWndClient = m_view.Create(m_hWnd, r, NULL, WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS | WS_CLIPCHILDREN | LBS_NOINTEGRALHEIGHT | LBS_NOTIFY | LBS_WANTKEYBOARDINPUT, WS_EX_CLIENTEDGE);
+	WTL::CRect r(0, 0, 800, 600);
+
+	m_hWndClient = m_view.Create(m_hWnd, r, NULL, 
+		WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS | WS_CLIPCHILDREN | 
+		LBS_NOINTEGRALHEIGHT | LBS_NOTIFY | LBS_WANTKEYBOARDINPUT, WS_EX_CLIENTEDGE);
+
 	m_view.SetFont(AtlGetDefaultGuiFont());
 
 	UIAddToolBar(hWndToolBar);
@@ -115,7 +131,7 @@ LRESULT CMainFrame::OnAppAbout(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCt
 }
 
 
-LRESULT CMainFrame::OnAppUserProps(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/)
+LRESULT CMainFrame::OnConnect(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/)
 {
 	CUserPropsDlg dlg;
 	dlg.DoModal();
@@ -129,6 +145,16 @@ LRESULT CMainFrame::OnAppUserProps(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hW
 
 	hThread = CreateThread
 		(0, 0, AimThread, (LPVOID) &m_view, 0, &dwThreadId);
+
+	return 0;
+}
+
+LRESULT CMainFrame::OnDisconnect(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/)
+{
+	m_view.sp->Quit();
+
+	if(hThread)
+		CloseHandle(hThread);
 
 	return 0;
 }
@@ -155,4 +181,29 @@ DWORD WINAPI CMainFrame::AimThread(LPVOID lpParam)
     hr = sp->Run();
     sp->Term();
 	return 0;
+}
+
+
+LRESULT CMainFrame::OnSysCommand(UINT /*uMsg*/, WPARAM wParam, LPARAM /*lParam*/, BOOL& /*bHandled*/)
+{
+	if(SC_MINIMIZE == wParam)
+	{
+		ShowWindow(SW_HIDE); //hWnd is the handle of the application window
+		return TRUE;
+	}
+	if(SC_CLOSE == wParam)
+	{
+		PostMessage(WM_CLOSE);
+		return 0;
+	}
+
+	return 1;
+}
+
+
+
+LRESULT CMainFrame::OnShow(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/)
+{
+	ShowWindow(SW_SHOW);
+	return TRUE;
 }

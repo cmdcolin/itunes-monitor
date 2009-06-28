@@ -18,7 +18,6 @@ class iTunesView : public CScrollWindowImpl<iTunesView, CListBox>
 private:
 
 	CComPtr<IiTunes> iTunes;
-	AimEventHandler * sp;
 	HANDLE hThread;
 	
 	CLSID iTunesCLSID;
@@ -34,6 +33,7 @@ private:
 public:
 
 	TCHAR username[256], password[256];
+	AimEventHandler * sp;
 
 	iTunesView(CMainFrame *);
 

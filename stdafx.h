@@ -10,6 +10,10 @@
 #define _CRT_SECURE_NO_WARNINGS
 
 
+#define VC_EXTRALEAN		// Exclude rarely-used stuff from Windows headers
+
+#define CTRAYNOTIFYICON_USE_WTL_STRING
+
 #define WINVER		0x0500
 #define _WIN32_WINNT	0x0501
 #define _WIN32_IE	0x0501
