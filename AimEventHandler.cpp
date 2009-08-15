@@ -22,15 +22,20 @@ HRESULT AimEventHandler::Init(AppView * itv, LPCTSTR username, LPCTSTR password)
 		hr = m_sp->get_ClientInfo(&spClientInfo);
 		if (SUCCEEDED(hr))
 		{
-			CAccVariant desc("accsample (key=ju13LC0KMdgmkiO0)");
+			CAccVariant desc("bb (key=ju13LC0KMdgmkiO0)");
 			
 			LPSTR u =W2A(username);
 			LPSTR p = W2A(password);
 
-			spClientInfo->put_Property(AccClientInfoProp_Description, desc);
-			if (SUCCEEDED(hr = m_sp->put_Identity(CAccBstr(u))))
-				hr = m_sp->SignOn(CAccBstr(p));
+			hr = spClientInfo->put_Property(AccClientInfoProp_Description, desc);
+			if(SUCCEEDED(hr))
+				if (SUCCEEDED(hr = m_sp->put_Identity(CAccBstr(u))))
+					hr = m_sp->SignOn(CAccBstr(p));
 
+				else
+					MessageBox(0,L"Test2",0,0);
+			else
+				MessageBox(0,L"Test1",0,0);
 
 		}
 	}
@@ -84,7 +89,9 @@ void AimEventHandler::OnStateChange(
 	itv->AddString(buf);
 
 	if (state == AccSessionState_Offline)
+	{
 		AccPostQuit(hr);        
+	}
 }   
 
 void AimEventHandler::OnSecondarySessionStateChange(
