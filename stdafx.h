@@ -9,29 +9,40 @@
 #define _CRT_NON_CONFORMING_SWPRINTFS
 #define _CRT_SECURE_NO_WARNINGS
 
-
-#define VC_EXTRALEAN		// Exclude rarely-used stuff from Windows headers
-
-#define CTRAYNOTIFYICON_USE_WTL_STRING
+//#define CTRAYNOTIFYICON_USE_WTL_STRING
 
 #define WINVER		0x0500
 #define _WIN32_WINNT	0x0501
 #define _WIN32_IE	0x0501
 #define _RICHEDIT_VER	0x0200
 
-#include <atlbase.h>
-#include <atlapp.h>
 
-extern CAppModule _Module;
+//#define STRICT
+//#define WIN32_LEAN_AND_MEAN
+//#define _WTL_USE_CSTRING
+ 
+#include <atlbase.h>       // base ATL classes
+#include <atlapp.h>        // base WTL classes
 
-#include <atltypes.h>
-#include <atlwin.h>
-#include <atlframe.h>
+
+extern CAppModule _Module; // WTL version of CComModule
+
+
+#include <atlwin.h>        // ATL GUI classes
+#include <atlframe.h>      // WTL frame window classes
+#include <atlmisc.h>       // WTL utility classes like CString
+#include <atlcrack.h>      // WTL enhanced msg map macros
+
+
+
+// #include <atltypes.h>
+
 #include <atlctrls.h>
 #include <atldlgs.h>
 #include <atlctrlw.h>
-#include <atlcrack.h>
 #include <atlscrl.h>
+
+
 
 #include <string>
 #include <sstream>
@@ -39,7 +50,7 @@ extern CAppModule _Module;
 extern "C" {
 
 #include "itunescominterface.h"
-#include "foobar2000_h.h"
+// #include "foobar2000_h.h"
 
 }
 

@@ -5,7 +5,6 @@
 
 #include "Error.h"
 #include "ItunesEventHandler.h"
-#include "AimEventHandler.h"
 
 class CMainFrame;
 
@@ -32,8 +31,6 @@ private:
 
 public:
 
-	TCHAR username[256], password[256];
-	AimEventHandler * sp;
 
 	AppView(CMainFrame *);
 
@@ -41,7 +38,7 @@ public:
 
 	BOOL PreTranslateMessage(MSG* pMsg);
 
-	BEGIN_MSG_MAP(AppView)  
+	BEGIN_MSG_MAP_EX(AppView)  
 
 //		CHAIN_MSG_MAP(CScrollWindowImpl<AppView>)
 
@@ -65,16 +62,4 @@ public:
 	LRESULT OnStop(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/);
 	LRESULT OnTrackChanged(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/);
 
-	void SetAimHandle(AimEventHandler * aim)
-	{
-		sp = aim;
-	}
-
-	void SetUserData(LPCTSTR user, LPCTSTR pass)
-	{
-		_tcscpy(username, user);
-		_tcscpy(password, pass);
-
-		return;
-	}
 };

@@ -6,7 +6,6 @@
 #include "resource.h"
 
 #include "AboutDlg.h"
-#include "UserPropsDlg.h"
 #include "AppView.h"
 #include "MainFrm.h"
 
@@ -133,55 +132,14 @@ LRESULT CMainFrame::OnAppAbout(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCt
 
 LRESULT CMainFrame::OnConnect(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/)
 {
-	CUserPropsDlg dlg;
-	dlg.DoModal();
-
-	m_view.SetUserData(dlg.username, dlg.password);
-
-	if(hThread)
-		CloseHandle(hThread);
-
-	DWORD dwThreadId = 0;
-
-	hThread = CreateThread
-		(0, 0, AimThread, (LPVOID) &m_view, 0, &dwThreadId);
-
 	return 0;
 }
 
 LRESULT CMainFrame::OnDisconnect(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/)
 {
-	m_view.sp->Quit();
-
-	if(hThread)
-		CloseHandle(hThread);
-
 	return 0;
 }
 
-
-DWORD WINAPI CMainFrame::AimThread(LPVOID lpParam)
-{
-	AppView * itv = (AppView *) lpParam;
-
-
-	
-    // create the app object and sign on
-    CAccPtr<AimEventHandler> sp(new AimEventHandler);
-	HRESULT hr = (sp) ? sp->Init(itv, itv->username, itv->password) : E_OUTOFMEMORY;
-//HRESULT hr = (sp) ? sp->Init(itv, _T("oblivioustonto"), _T("maynard")) : E_OUTOFMEMORY;
-
-    if (FAILED(hr))
-    {
-        printf("initialization error, hr=%08X\n", hr);
-        return (int)hr;
-    }
-            
-    // run the message loop
-    hr = sp->Run();
-    sp->Term();
-	return 0;
-}
 
 
 LRESULT CMainFrame::OnSysCommand(UINT /*uMsg*/, WPARAM wParam, LPARAM /*lParam*/, BOOL& bHandled)

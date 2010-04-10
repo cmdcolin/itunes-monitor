@@ -18,7 +18,7 @@ BOOL AppView::PreTranslateMessage(MSG* pMsg)
 }
 
 AppView::AppView(CMainFrame * parent) : 
-	parent(parent), m_CURL(m_hWnd), sp(0), hThread(0)
+	parent(parent), m_CURL(m_hWnd), hThread(0)
 {
 }
 
@@ -51,7 +51,7 @@ LRESULT AppView::OnCreate(LPCREATESTRUCT lpcs)
 	
 
 	
-	SetMsgHandled(false);
+	//SetMsgHandled(false);
 
 	IConnectionPointContainer * icpc;
 
@@ -92,12 +92,6 @@ LRESULT AppView::OnCreate(LPCREATESTRUCT lpcs)
 
 void AppView::OnDestroy()
 {
-	if(sp)
-		sp->Quit();
-
-	if(hThread)
-		CloseHandle(hThread);
-
 	if(m_comConnPt)
 	{
 		HRESULT hRes = m_comConnPt->Unadvise(m_comConnCookie);
@@ -138,19 +132,20 @@ LRESULT AppView::OnPlay(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/)
 
 	CComBSTR na(_T("N/A"));
 
-	CW2T pszArtist(bartist ? artist : na);
-	CW2T pszAlbum(balbum ? album : na);
-	CW2T pszTrack(btrack ? track : na);
+    std::wstring pszTrack(btrack ? track : na.m_str);
+    std::wstring pszAlbum(balbum ? album : na.m_str);
+    std::wstring pszArtist(bartist ? artist : na.m_str);
 
 	std::basic_stringstream<TCHAR> ss;
 	ss 
-		<< (pszArtist.m_psz ? pszArtist.m_psz : _T("N/A")) << " - [" 
-		<< (pszAlbum.m_psz ? pszAlbum.m_psz : _T("N/A")) << "] - " 
-		<< (pszTrack.m_psz ? pszTrack.m_psz : _T("N/A"));
+		<< (pszArtist) << " - [" 
+		<< (pszAlbum) << "] - " 
+		<< (pszTrack);
 
-	AddString(ss.str().c_str());
-
-	sp->SetStatus(ss.str().c_str());
+	if(LB_ERR == AddString(ss.str().c_str()))
+    {
+        MessageBox(0, 0, 0);
+    }
 	
 	return 0;
 }
