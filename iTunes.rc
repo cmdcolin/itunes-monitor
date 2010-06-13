@@ -179,8 +179,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,5,1,228
- PRODUCTVERSION 1,5,1,228
+ FILEVERSION 1,5,1,231
+ PRODUCTVERSION 1,5,1,231
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -196,12 +196,12 @@ BEGIN
         BLOCK "040904B0"
         BEGIN
             VALUE "FileDescription", "iTunes Module"
-            VALUE "FileVersion", "1, 5, 1, 228"
+            VALUE "FileVersion", "1, 5, 1, 231"
             VALUE "InternalName", "iTunes"
             VALUE "LegalCopyright", "Copyright 2008-2010"
             VALUE "OriginalFilename", "iTunes.exe"
             VALUE "ProductName", "iTunes Module"
-            VALUE "ProductVersion", "1, 5, 1, 228"
+            VALUE "ProductVersion", "1, 5, 1, 231"
         END
     END
     BLOCK "VarFileInfo"

@@ -51,7 +51,7 @@ LRESULT AppView::OnCreate(LPCREATESTRUCT lpcs)
 	
 
 	
-	//SetMsgHandled(false);
+	SetMsgHandled(false);
 
 	IConnectionPointContainer * icpc;
 
