@@ -55,9 +55,11 @@ IDR_MAINFRAME TOOLBAR  16, 15
 BEGIN
     BUTTON      ID_CONNECT
     BUTTON      ID_DISCONNECT
+    BUTTON      ID_BUTTON32777
+    BUTTON      ID_BUTTON32778
+    BUTTON      ID_BUTTON32779
     BUTTON      ID_APP_ABOUT
 END
-
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -76,32 +78,30 @@ IDR_MAINFRAME MENU
 BEGIN
     POPUP "&File"
     BEGIN
-        MENUITEM "&Connect\tCtrl+C",                ID_CONNECT
-        MENUITEM "&Disconnect\tCtrl+D",            ID_DISCONNECT
-        MENUITEM "&Save Log\tCtrl+S",               ID_FILE_SAVE
+        MENUITEM "&Save Log\tCtrl+S",           ID_FILE_SAVE
         MENUITEM SEPARATOR
         MENUITEM "E&xit",                       ID_APP_EXIT
-    END   
-	POPUP "&View"
-	BEGIN
+    END
+    POPUP "&View"
+    BEGIN
         MENUITEM "&Toolbar",                    ID_VIEW_TOOLBAR
         MENUITEM "&Status Bar",                 ID_VIEW_STATUS_BAR
     END
     POPUP "&About"
     BEGIN
-        MENUITEM "&About...",              ID_APP_ABOUT
+        MENUITEM "&About...",                   ID_APP_ABOUT
     END
 END
-
 
 IDR_TRAYPOPUP MENU 
 BEGIN
     POPUP "_POPUP_"
     BEGIN
-        MENUITEM "E&xit...",              ID_APP_EXIT
-        MENUITEM "&About...",          ID_APP_ABOUT
-		MENUITEM "Minimize to tray", -1
-		MENUITEM "Maximize", -1
+        MENUITEM "Minimize to tray",            ID__MINIMIZETOTRAY
+        MENUITEM "Maximize",                    ID__MAXIMIZE
+        MENUITEM SEPARATOR
+        MENUITEM "&About...",                   ID_APP_ABOUT
+        MENUITEM "E&xit...",                    ID_APP_EXIT
     END
 END
 
@@ -132,7 +132,6 @@ BEGIN
 END
 
 
-
 /////////////////////////////////////////////////////////////////////////////
 //
 // DESIGNINFO
@@ -148,14 +147,6 @@ BEGIN
         TOPMARGIN, 7
         BOTTOMMARGIN, 95
     END
-
-    IDD_USERPROPS, DIALOG
-    BEGIN
-        LEFTMARGIN, 7
-        RIGHTMARGIN, 309
-        TOPMARGIN, 7
-        BOTTOMMARGIN, 173
-    END
 END
 #endif    // APSTUDIO_INVOKED
 
@@ -167,8 +158,8 @@ END
 
 IDR_MAINFRAME ACCELERATORS 
 BEGIN
-    "C",            ID_CONNECT,            VIRTKEY, CONTROL
-    "D",            ID_DISCONNECT,           VIRTKEY, CONTROL
+    "C",            ID_CONNECT,             VIRTKEY, CONTROL
+    "D",            ID_DISCONNECT,          VIRTKEY, CONTROL
     "S",            ID_FILE_SAVE,           VIRTKEY, CONTROL
 END
 
@@ -179,8 +170,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,5,1,231
- PRODUCTVERSION 1,5,1,231
+ FILEVERSION 1,5,2,263
+ PRODUCTVERSION 1,5,2,263
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -196,12 +187,12 @@ BEGIN
         BLOCK "040904B0"
         BEGIN
             VALUE "FileDescription", "iTunes Module"
-            VALUE "FileVersion", "1, 5, 1, 231"
+            VALUE "FileVersion", "1, 5, 2, 263"
             VALUE "InternalName", "iTunes"
             VALUE "LegalCopyright", "Copyright 2008-2010"
             VALUE "OriginalFilename", "iTunes.exe"
             VALUE "ProductName", "iTunes Module"
-            VALUE "ProductVersion", "1, 5, 1, 231"
+            VALUE "ProductVersion", "1, 5, 2, 263"
         END
     END
     BLOCK "VarFileInfo"
@@ -209,12 +200,6 @@ BEGIN
         VALUE "Translation", 0x409, 1200
     END
 END
-
-
-/////////////////////////////////////////////////////////////////////////////
-//
-// EDITTEXT
-//
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -229,8 +214,12 @@ END
 
 STRINGTABLE 
 BEGIN
-    ID_CONNECT             "Connect"
-    ID_DISCONNECT            "Disconnect"
+    ID_CONNECT              "Connect"
+    ID_DISCONNECT           "Disconnect"
+END
+
+STRINGTABLE 
+BEGIN
     ID_FILE_SAVE            "Save log"
 END
 
@@ -240,14 +229,11 @@ BEGIN
     ID_APP_EXIT             "Quit the application; prompts to save documents\nExit"
 END
 
-
-
 STRINGTABLE 
 BEGIN
     ID_VIEW_TOOLBAR         "Show or hide the toolbar\nToggle ToolBar"
     ID_VIEW_STATUS_BAR      "Show or hide the status bar\nToggle StatusBar"
 END
-
 
 #endif    // English (U.S.) resources
 /////////////////////////////////////////////////////////////////////////////

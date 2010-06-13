@@ -41,11 +41,12 @@ extern CAppModule _Module; // WTL version of CComModule
 #include <atldlgs.h>
 #include <atlctrlw.h>
 #include <atlscrl.h>
+#include <strsafe.h>
 
 
 
-#include <string>
-#include <sstream>
+//#include <string>
+//#include <sstream>
 
 extern "C" {
 

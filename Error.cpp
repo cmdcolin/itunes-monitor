@@ -4,8 +4,9 @@
 void g_report_error(HRESULT hRes, LPCTSTR pszInfo) 
 {
 	HLOCAL hBuffer = NULL;
-	std::basic_stringstream<TCHAR> ss;
-	
+	TCHAR buffer[512];
+
+
 	if(::FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER | 
 		FORMAT_MESSAGE_FROM_SYSTEM, NULL, hRes, MAKELANGID(LANG_NEUTRAL, 
 		SUBLANG_NEUTRAL), (LPTSTR)(LPVOID)&hBuffer, 0, NULL) > 0) 
@@ -13,16 +14,14 @@ void g_report_error(HRESULT hRes, LPCTSTR pszInfo)
 			LPCTSTR pszMessage = LPCTSTR(::LocalLock(hBuffer));
 			if (pszMessage != NULL) 
 			{
-				ss << pszInfo << ": (" << std::hex << hRes << ") " << pszMessage;
+				StringCchPrintf(buffer, sizeof(buffer), _T("%08x: %s - %s"), 
+					hRes, pszInfo, pszMessage);
+
 				::LocalUnlock(hBuffer);
 			}
 	} 
-	else 
-	{
-		ss << pszInfo << ": (" << std::hex << hRes << ")";
-	}
 	if (hBuffer != NULL)
 		::LocalFree(hBuffer);
 
-	::MessageBox(0, ss.str().c_str(), _T("Fail"), MB_OK);
+	::MessageBox(0, buffer, _T("Fail"), MB_OK);
 }

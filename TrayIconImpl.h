@@ -51,7 +51,8 @@ public:
 		m_nid.hIcon = hIcon;
 		m_nid.uFlags = NIF_MESSAGE | NIF_ICON | NIF_TIP;
 		m_nid.uCallbackMessage = WM_TRAYICON;
-		_tcscpy(m_nid.szTip, lpszToolTip);
+		
+		StringCchCopy(m_nid.szTip, sizeof(m_nid.szTip), lpszToolTip);
 		// Install
 		m_bInstalled = Shell_NotifyIcon(NIM_ADD, &m_nid) ? true : false;
 		// Done
@@ -77,7 +78,7 @@ public:
 			return FALSE;
 		// Fill the structure
 		m_nid.uFlags = NIF_TIP;
-		_tcscpy(m_nid.szTip, pszTooltipText);
+		StringCchCopy(m_nid.szTip, sizeof(m_nid.szTip), pszTooltipText);
 		// Set
 		return Shell_NotifyIcon(NIM_MODIFY, &m_nid) ? true : false;
 	}

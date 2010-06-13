@@ -94,9 +94,42 @@ LRESULT CMainFrame::OnFileExit(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCt
 	return 0;
 }
 
-LRESULT CMainFrame::OnFileNew(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/)
+
+LRESULT CMainFrame::OnFileSave(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/)
 {
-	// TODO: add code to initialize document
+	CString cstr;
+	TCHAR * szSelectedFile;
+
+	CFileDialog fileDlg ( true, _T("txt"), NULL,
+		OFN_HIDEREADONLY,
+		_T(".txt\0*.txt\0All Files\0*.*\0") );
+
+	if ( IDOK == fileDlg.DoModal() )
+		szSelectedFile = fileDlg.m_szFileName;
+
+	HANDLE hFile = CreateFile(szSelectedFile, GENERIC_WRITE, 
+		FILE_SHARE_WRITE, 0, CREATE_NEW, FILE_ATTRIBUTE_NORMAL, 0);
+
+	DWORD dwBytesWritten;
+
+	if(hFile == INVALID_HANDLE_VALUE) 
+		return FALSE;
+
+	unsigned short BOM = 0xFEFF;
+	WriteFile(hFile, &BOM, sizeof(BOM), & dwBytesWritten, 0);
+
+
+	for(int i = 0; i < m_view.GetCount(); i++) {
+
+		int ret = m_view.GetText(i, cstr);
+		cstr += _T("\r\n");
+		
+		WriteFile(hFile, cstr.GetBuffer(0), cstr.GetLength() * 2, &dwBytesWritten, 0);
+	}
+
+	CloseHandle(hFile);
+
+
 
 	return 0;
 }
@@ -130,16 +163,6 @@ LRESULT CMainFrame::OnAppAbout(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCt
 }
 
 
-LRESULT CMainFrame::OnConnect(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/)
-{
-	return 0;
-}
-
-LRESULT CMainFrame::OnDisconnect(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/)
-{
-	return 0;
-}
-
 
 
 LRESULT CMainFrame::OnSysCommand(UINT /*uMsg*/, WPARAM wParam, LPARAM /*lParam*/, BOOL& bHandled)
@@ -149,19 +172,31 @@ LRESULT CMainFrame::OnSysCommand(UINT /*uMsg*/, WPARAM wParam, LPARAM /*lParam*/
 		ShowWindow(SW_HIDE); //hWnd is the handle of the application window
 		return TRUE;
 	}
+
 	else if(SC_CLOSE == wParam)
 	{
 		PostMessage(WM_CLOSE);
 		return TRUE;
 	}
 	else
-		bHandled = false;
+		SetMsgHandled(false);
 
 
 	return 0;
 }
 
 
+LRESULT CMainFrame::OnScMaximize(UINT, INT, HWND)
+{
+	ShowWindow(SW_SHOW);
+	BringWindowToTop();
+	return 0;
+}
+LRESULT CMainFrame::OnScMinimize(UINT, INT, HWND)
+{
+	ShowWindow(SW_HIDE);
+	return 0;
+}
 
 LRESULT CMainFrame::OnShow(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/)
 {

@@ -52,19 +52,3 @@ struct iTunesCOManager : public COManager<IiTunes>
 	}
 
 };
-
-struct foobarCOManager : COManager<IVBApplication>
-{
-	virtual HRESULT initialize()
-	{
-		HRESULT hRes = ptr.CoCreateInstance(CLSID_Application07);
-
-		if(FAILED(hRes))
-		{
-			err = g_report_error(hRes, _T("CComPtr<IVBApplication>::CoCreateInstance"));
-			error = true;
-		}
-
-		return hRes;
-	}
-};

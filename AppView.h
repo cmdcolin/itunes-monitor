@@ -17,7 +17,6 @@ class AppView : public CScrollWindowImpl<AppView, CListBox>
 private:
 
 	CComPtr<IiTunes> iTunes;
-	HANDLE hThread;
 	
 	CLSID iTunesCLSID;
 	CMainFrame * parent;
@@ -25,9 +24,6 @@ private:
 	iTunesEventHandler * m_eventSink;
     IConnectionPoint* m_comConnPt;
 	DWORD m_comConnCookie;
-
-	
-	CEdit m_CURL;
 
 public:
 

@@ -13,13 +13,13 @@ BOOL GetAppVersion( LPCTSTR LibName, WORD *MajorVersion, WORD *MinorVersion, WOR
 LRESULT CAboutDlg::OnInitDialog(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& /*bHandled*/)
 {
 	TCHAR buffer[512];
-	::GetModuleFileName(::GetModuleHandle(0), buffer, sizeof(buffer));
+	GetModuleFileName(GetModuleHandle(0), buffer, sizeof(buffer));
 
 	WORD major, minor, build, rev;
 	GetAppVersion(buffer, &major, &minor, &rev, &build);
 
 
-	wsprintf(buffer, _T("iTunes Application v%d.%d.%d.%d\n\n(c) Copyright 2008-2009"), 
+	StringCchPrintf(buffer, sizeof(buffer), _T("iTunes Application v%d.%d.%d.%d\n\n(c) Copyright 2008-2009"), 
 		major, minor, rev, build);
 
 	SetDlgItemText(IDC_LABEL, buffer);

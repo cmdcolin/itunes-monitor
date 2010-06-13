@@ -1,6 +1,8 @@
-// AppView.cpp : implementation of the AppView class
-//
-/////////////////////////////////////////////////////////////////////////////
+/*!
+ * This is the scroll view which connects to the itunes controller
+ * 
+ * Copyright (c) 200x by Colin
+ */
 
 #include "stdafx.h"
 #include "resource.h"
@@ -10,28 +12,28 @@
 
 
 
-
+/// Does nothing
 BOOL AppView::PreTranslateMessage(MSG* pMsg)
 {
 	pMsg;
 	return FALSE;
 }
 
+
+/// Does nothing
 AppView::AppView(CMainFrame * parent) : 
-	parent(parent), m_CURL(m_hWnd), hThread(0)
+	parent(parent)
 {
 }
 
+
+/// Does nothing
 LRESULT AppView::OnCreate(LPCREATESTRUCT lpcs)
 {    
 	CenterWindow();
 
 	SetScrollOffset(lpcs->cx, lpcs->cy, FALSE);
 	SetScrollSize(lpcs->cx, lpcs->cy);
-
-
-	RECT rect = { 200, 200, 200, 50 };
-	m_CURL.Create(m_hWnd, &rect, _T(""), WS_CHILD|WS_BORDER);
 
 	HRESULT hRes = ::CLSIDFromProgID(_T("iTunes.Application"), &iTunesCLSID);
 
@@ -90,6 +92,9 @@ LRESULT AppView::OnCreate(LPCREATESTRUCT lpcs)
 	return 0;
 }
 
+
+
+/// Does nothing
 void AppView::OnDestroy()
 {
 	if(m_comConnPt)
@@ -110,7 +115,7 @@ void AppView::OnDestroy()
 
 
 
-
+/// Does nothing
 LRESULT AppView::OnPlay(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/)
 {
 	CComPtr<IITTrack> rofl;
@@ -131,29 +136,31 @@ LRESULT AppView::OnPlay(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/)
 	bool btrack = rofl->get_Name(&track) == S_OK;
 
 	CComBSTR na(_T("N/A"));
+	CString buffer;
 
-    std::wstring pszTrack(btrack ? track : na.m_str);
-    std::wstring pszAlbum(balbum ? album : na.m_str);
-    std::wstring pszArtist(bartist ? artist : na.m_str);
+	buffer.Format(_T("%s - [%s] - %s"), 
+		bartist ? CString(artist) : CString(na),
+		balbum ? CString(album) : CString(na),
+		btrack ? CString(track) : CString(na));
 
-	std::basic_stringstream<TCHAR> ss;
-	ss 
-		<< (pszArtist) << " - [" 
-		<< (pszAlbum) << "] - " 
-		<< (pszTrack);
-
-	if(LB_ERR == AddString(ss.str().c_str()))
+	if(LB_ERR == AddString(buffer))
     {
         MessageBox(0, 0, 0);
     }
 	
 	return 0;
 }
+
+
+/// Does nothing
 LRESULT AppView::OnStop(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/)
 {
 	// //AddString(L"stop");
 	return 0;
 }
+
+
+/// Does nothing
 LRESULT AppView::OnTrackChanged(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/)
 {
 	// //AddString(L"change");
